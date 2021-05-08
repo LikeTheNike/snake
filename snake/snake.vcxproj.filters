@@ -4,10 +4,30 @@
     <Filter Include="Source">
       <UniqueIdentifier>{ce941ade-51a3-4ebb-96a6-d4b348e98451}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{fa2fc6af-28c9-4390-9e5e-28f9634fe51b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Snake.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Food.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Body.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
