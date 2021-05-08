@@ -2,11 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-/*
-
-Body body(na position);
-
-*/
+#include "Drawhelper.h"
 
 class Body
 {
@@ -16,7 +12,7 @@ public:
 		position = startPosition;
 	}
 
-	void draw(sf::RenderTarget& target)
+	void draw(DrawHelper& drawHelper)
 	{
 	}
 

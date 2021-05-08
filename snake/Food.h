@@ -1,17 +1,26 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
+#include "Drawhelper.h"
+
 
 class Food
 {
 public:
-	Food()
+	Food(sf::Vector2i startPosition)
+	{
+		position = startPosition;
+	}
+
+	void draw(DrawHelper& drawHelper)
 	{
 	}
 
-	void draw(sf::RenderTarget& target)
+	sf::Vector2i getPosition() const
 	{
+		return position;
 	}
 
 private:
-
+	sf::Vector2i position;
 };

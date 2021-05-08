@@ -5,6 +5,7 @@
 
 #include "Body.h"
 #include "Direction.h"
+#include "Drawhelper.h"
 
 class Snake
 {
@@ -13,20 +14,28 @@ public:
 	{
 		for (int i = 0; i < startLength; ++i)
 		{
-			bodies.push(Body(startPosition + i * StepForDirection(startDirection)));
+			bodies.push_front(Body(startPosition + i * StepForDirection(startDirection)));
 		}
 		
 		direction = startDirection;
 	}
 
-	void draw(sf::RenderTarget& target)
+	void draw(DrawHelper& drawHelper)
 	{
+		for (int i = 0; i < bodies.size(); ++i)
+		{
+			bodies[i].draw(drawHelper);
+		}
 	}
 
 	void move(bool increaseLength)
 	{
-		bodies.push(Body(nextPosition()));
-		bodies.pop();
+		bodies.push_front(Body(nextPosition()));
+
+		if (increaseLength == false)
+		{
+			bodies.pop_back();
+		}
 	}
 
 	sf::Vector2i getHead() const
@@ -36,6 +45,15 @@ public:
 	
 	bool collidesWith(sf::Vector2i position) const
 	{
+		for (int i = 0; i < bodies.size(); ++i)
+		{
+			if (position == bodies[i].getPosition())
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	sf::Vector2i nextPosition() const
@@ -45,5 +63,5 @@ public:
 	
 private:
 	Direction direction;
-	std::queue<Body> bodies;
+	std::deque<Body> bodies;
 };
