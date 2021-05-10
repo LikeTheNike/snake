@@ -14,6 +14,18 @@ public:
 
 	void draw(DrawHelper& drawHelper)
 	{
+		if (initialized == false)
+		{
+			rect.setFillColor(sf::Color::Green);
+			rect.setPosition(sf::Vector2f(
+				position.x * drawHelper.getGridSize().x,
+				position.y * drawHelper.getGridSize().y));
+			rect.setSize(drawHelper.getGridSize());
+
+			initialized = true;
+		}
+
+		drawHelper.getTarget().draw(rect);
 	}
 
 	sf::Vector2i getPosition() const
@@ -22,5 +34,8 @@ public:
 	}
 
 private:
+	bool initialized = false;
+
 	sf::Vector2i position;
+	sf::RectangleShape rect;
 };

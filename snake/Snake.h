@@ -19,7 +19,7 @@ public:
 		
 		direction = startDirection;
 	}
-
+	
 	void draw(DrawHelper& drawHelper)
 	{
 		for (int i = 0; i < bodies.size(); ++i)
@@ -61,6 +61,15 @@ public:
 		return getHead() + StepForDirection(direction);
 	}
 	
+	void setDirection(Direction newDirection)
+	{
+		if (IsDirectionInverted(direction, newDirection) == false)
+		{
+			direction = newDirection;
+		}
+	}
+
+
 private:
 	Direction direction;
 	std::deque<Body> bodies;

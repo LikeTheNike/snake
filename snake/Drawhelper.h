@@ -7,11 +7,12 @@ class DrawHelper
 public:
 	DrawHelper(sf::RenderTarget& target, sf::Vector2f gridSize)
 		:
-		target(target)
+		target(target),
+		gridSize(gridSize)
 	{
 	}
 
-	const sf::RenderTarget& getTarget() const
+	sf::RenderTarget& getTarget() const
 	{
 		return target;
 	}

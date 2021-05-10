@@ -30,20 +30,53 @@ public:
 
 	void draw(DrawHelper& drawHelper)
 	{
+		for (int i = 0; i < foods.size(); ++i)
+		{
+			foods[i].draw(drawHelper);
+		}
+
+		snake.draw(drawHelper);
 	}
 	
-	void setSnakeDirection()
+	void setSnakeDirection(Direction direction)
 	{
+		snake.setDirection(direction);
 	}
 
 	void moveSnake()
 	{
+		int foodIndex = getFoodAt(snake.nextPosition());
+
+		if (foodIndex != -1)
+		{
+			foods.erase(foods.begin() + foodIndex);
+		}
+
+		snake.move(foodIndex != -1);
+
+		if (foodIndex != -1)
+		{
+			generateNewFood();
+		}
 	}
 
 private:
 	std::vector<Food> foods;
 	Snake snake;
 	sf::Vector2i boardSize;
+
+	int getFoodAt(sf::Vector2i position)
+	{
+		for (int i = 0; i < foods.size(); ++i)
+		{
+			if (foods[i].getPosition() == position)
+			{
+				return i;
+			}
+		}
+		
+		return -1;
+	}
 	
 	void generateNewFood()
 	{
@@ -59,18 +92,14 @@ private:
 			}
 
 			foods.push_back(food);
+			break;
 		}
 	}
 
 	bool collidesWithAnything(Food& food)
 	{
-		for (int i = 0; i < foods.size(); ++i)
-		{
-			if (foods[i].getPosition() == food.getPosition())
-			{
-				return true;
-			}
-		}
+		if (getFoodAt(food.getPosition()) != -1)
+			return true;
 		
 		return snake.collidesWith(food.getPosition());
 	}
